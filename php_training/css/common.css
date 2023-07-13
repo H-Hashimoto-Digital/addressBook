@@ -1,0 +1,73 @@
+@charset "utf-8";
+
+body{
+    width:100%;
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+    background-color: rgb(134, 227, 255);
+}
+
+.wrapper{
+    position:relative;
+    display: flex;
+    /*flex-direction: row;*/
+    width:100%;
+    height:100vh;
+    /* border: 2px solid green;
+    */
+}
+
+/******************************************************
+    header（index.html以外）
+*******************************************************/
+header{
+    width:100%;
+    height: 12vh;
+    position:fixed;
+    top:0;
+    /*border:2px solid orange;/*検証用*/
+    padding:10px 30px 0 30px;
+}
+
+header .logo{
+
+}
+
+header .header_right{
+    margin:0 0 0 auto;
+    display: flex;
+    width:250px;
+    flex-direction: column;
+    /*border:2px solid orange;/*検証用*/
+}
+
+header .header_right .welcome{
+    margin:0 0 0 auto;
+}
+
+header .header_right .link{
+    margin:0 0 0 auto;
+}
+
+/******************************************************
+    .main
+*******************************************************/
+.main{
+    width:100%;
+    padding:15vh 30px;/*headerがfixedされているのでtopに12vh以上の余白を空けておく*/
+    background-color: rgb(255, 255, 255);
+    /*border:2px solid greenyellow;/*検証用*/
+    display: flex;
+    flex-direction: column;
+}
+/******************************************************
+    footer
+*******************************************************/
+footer{
+    margin-top:40px;
+    width:100%;
+    height:16vh;
+    background-color: rgb(28, 93, 214);
+    position:relative;
+}
