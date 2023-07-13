@@ -7,8 +7,8 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<link rel="stylesheet" href="./css/common.css">
-<link rel="stylesheet" href="./css/mypage.css">
+<!--<link rel="stylesheet" href="./css/common.css">-->
+<!--<link rel="stylesheet" href="./css/mypage.css">-->
 <!-- BootstrapのCSS読み込み -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"><!-- jQuery読み込み -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
