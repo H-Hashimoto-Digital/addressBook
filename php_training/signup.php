@@ -8,11 +8,16 @@
 <body>
     <h1>サインアップ</h1>
     <form action="register_newuser.php" method="post">
-        <input type="text" name="user_name">
-        <input type="text" name="password">
-        <input type="text" name="address">
-        <input type="text" name="tel">
-        <input type="text" name="mail">
+        <label for="user_name">名前</label>
+        <input type="text" name="user_name" id="user_name">
+        <label for="password">パスワード</label>
+        <input type="text" name="password" id="password">
+        <label for="address">住所</label>
+        <input type="text" name="address" id="address">
+        <label for="tel">電話番号</label>
+        <input type="text" name="tel" id="tel">
+        <label for="mail">メールアドレス</label>
+        <input type="text" name="mail" id="mail">
         
         <input type="submit" value="登録">
     </form>

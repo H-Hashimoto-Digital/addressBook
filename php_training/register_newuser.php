@@ -9,32 +9,45 @@
     $mail = $_POST['mail'];
     $user_id = '';
 
+    //var_dump(file_put_contents("out_register_newuser.txt",[$user_name,$password,$address,$tel,$mail], FILE_APPEND));
+
+    // 最低限の情報（ユーザ名・パスワード）が入力されていない場合
+    if(empty($user_name) || empty($password)){
+        $mysqli->close();// DB接続解除
+        header("Location: ./index.php");
+    }
+
     // 同じユーザ名を持つ既存のユーザがいる場合（こちらのユーザ名は既に使われています）
+    $sql_duplication = "SELECT * FROM user_login WHERE user_name = '".$user_name."'";
+    $result_duplication = $mysqli->query($sql_duplication);
+    if(!empty($result_duplication)){
+        $mysqli->close();// DB接続解除
+        header("Location: ./index.php");
+    }
 
     // まずはuser_loginへINSERTし、オートインクリメントによってユーザIDを発行する。
     $sql_login = "INSERT INTO user_login (user_name, password) VALUES (?, ?)";
-    $stmt_login = $pdo->prepare($sql_login);
-    $param_login = array($user_name, $password);
-    $stmt_login->execute($param_login);
-
-    $sql_user_id = "SELECT id FROM user_login WHERE user_name = ? AND password = ?";
-    $stmt_user_id = $pdo->prepare($sql_user_id);
-    $param_user_id = array($user_name, $password);
-    $stmt_user_id->execute($param_user_id);
-
-    foreach($stmt_user_id as $row){
-        $user_id = $row['id'];
+    if($stmt_login = $mysqli->prepare($sql_login)){
+        $stmt_login->bind_param('ss', $user_name, $password);
+        $stmt_login->execute();
     }
 
-    if($response_user_id){
-        $user_id = $stmt_user_id->fetch(); // SQL実行結果からユーザIDを取得
+    $sql_user_id = "SELECT id FROM user_login WHERE user_name ='".$user_name."AND password = '".$password."'";
+    if($result_user_id = $mysqli->query($sql_user_id)){
+
+        // SQL実行結果（オートインクリメントされたユーザID）を変数$user_idに格納
+        while($row = $result_user_id->fetch_assoc()){
+            $user_id = $row["id"];
+        }
     }
+
 
     // 取得したユーザIDを使って、次はuser_profileにフォーム入力値を登録。
     $sql_profile = "INSERT INTO user_profile (user_id, address, tel, mail) VALUES (?,?,?,?)";
-    $stmt_profile = $pdo->prepare($sql_profile);
-    $param_profile = array((int)$user_id, $address, $tel, $mail);
-    $stmt_profile->execute($param_profile);
+    if($stmt_profile = $mysqli->prepare($sql_profile)){
+        $stmt_profile->bind_param('isss',(int)$user_id,$address,$tel, $mail);
+        $stmt_profile->execute();
+    }
 
     $mysqli->close();// DB接続解除
     header("Location: ./index.php");

@@ -7,6 +7,9 @@
     // DB接続結果を格納する変数
     $user_id = '';
 
+    // テスト：テキストファイルに変数の内容を書き込む
+    // var_dump(file_put_contents("out.txt","login"));
+
 
     //POSTされたユーザ名・パスワードをセッション変数に格納。ユーザ名が空の場合は分岐
     $user_name_post = $_POST['user_name'];
@@ -37,11 +40,12 @@
 
     // 該当ユーザがいた場合/いなかった場合で分岐
     if(!empty($user_id)){
+        var_dump(file_put_contents("out_login.txt","login"));
         $_SESSION['user_id'] = $user_id;
         $_SESSION['user_name'] = $user_name_post;
         header('Location: ./home.php');     // homeへ遷移
     }else{
-        header("Location: ./index.php/?err_msg='ユーザ名かパスワードが間違っています。'");
+        header("Location: ./index.php");
     }
 
     

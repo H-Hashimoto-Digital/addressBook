@@ -1,1 +1,1 @@
-http://localhost/php_code/php_training/index.php
+http://localhost/php_code/repository/php_training/index.php

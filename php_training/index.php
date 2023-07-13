@@ -15,10 +15,11 @@
         <div class="main">
             <div class="main_box">
                 <h4>ログインフォーム</h4>
-                <p class="err_msg"><?php if(isset($_GET['err_msg'])){echo $_GET['err_msg'];} ?></p>
                 <form action="login.php" method="POST">
-                    <input type="text" placeholder="ユーザ名" name="user_name">
-                    <input type="text" placeholder="パスワード" name="password">
+                    <label for="user_name">ユーザ名</label>
+                    <input type="text" placeholder="ユーザ名" name="user_name" id="user_name">
+                    <label for="password">パスワード</label>
+                    <input type="text" placeholder="パスワード" name="password" id="password">
                     
                     <input type="submit" value="ログイン" class="btn_login">
 

@@ -81,6 +81,8 @@
                     }
                 }
 
+                var_dump(file_put_contents("out_mypage.txt",[$user_name,$address,$tel,$mail], FILE_APPEND));
+
                 $mysqli->close();// DB接続解除
 
             ?>
@@ -89,11 +91,11 @@
                 <tbody>
                     <tr>
                         <th>ユーザID</th>
-                        <td><?php echo $_SESSION['user_id'];?></td>
+                        <td><?php if(!empty($user_name)){echo $user_name;}?></td>
                     </tr>
                     <tr>
                         <th>名前</th>
-                        <td><?php if(!empty($user_name)){echo $user_name;} ?></td>
+                        <td><?php echo $_SESSION['user_id'];?></td>
                     </tr>
                     <tr>
                         <th>住所</th>
@@ -110,16 +112,12 @@
                 </tbody>
             </table>
 
-            <!--プロフィールをアップデート-->
+            <!--プロフィールをアップデート。名前を簡単に更新できてはならない-->
             <form action="update_profile.php" method="post">
                 <h5>プロフィール更新フォーム</h5>
 
                 <table class="table_update">
                     <tbody>
-                        <tr>
-                            <th>名前</th>
-                            <td><input type="text" name="user_name" value="<?php if(!empty($user_name)){echo $user_name;} ?>"></td>
-                        </tr>
                         <tr>
                             <th>住所</th>
                             <td><input type="text" name="address" value="<?php if(!empty($address)){echo $address;} ?>"></td>
