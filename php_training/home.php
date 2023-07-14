@@ -20,9 +20,9 @@
         require('dbconnect.php'); // 別ファイルに書かれた処理をを実行する
         
         // search_user.phpから返ってきたユーザー検索結果を格納
-        if(!empty($_GET['serach'])){
-            $search = $_GET['search'];
-        }  
+        // if(!empty($_GET['serach'])){
+        //     $search = $_GET['search'];
+        // }  
     ?>
     <div class="wrapper">
         <header>
@@ -42,15 +42,36 @@
 
             <div class="search">
                 <!--ユーザーを検索-->
-                <form action="search_user.php" method="get">
+                <form action="" method="post">
                     <input type="text" name="search">
                     <input type="submit" value="検索">
                 </form>
             </div>
 
+            
+
             <div class="search_result">
+                <!--上記検索窓への入力値を基にユーザ名を検索する-->
+                <?php
+                    $search = $_POST["search"]; // フォーム入力値（検索ワード）
+
+                    $array = array();   // 検索結果を格納する配列
+
+                    // 検索ワードを基にuser_loginからユーザーを検索。検索対象となったユーザ名を配列$arrayに入れる。
+                    $sql_search = "SELECT user_name FROM user_login WHERE user_name LIKE '%".$search."%'";
+                    if($result_search = $mysqli->query($sql_search)){
+                        $i = 0;
+                        while($row = $result_search->fetch_assoc()){
+                            $array[$i] = $row['user_name'];
+                            $i++;
+                        }
+                    }
+
+
+                ?>
+
                 <!--検索結果を表示。検索結果をクリックすると別ユーザのmypageに行ける。友達登録も可能-->
-                <p>検索結果：<?php if(!empty($search)){echo $search;} ?></p>
+                <p>検索結果：<?php foreach($array as $value){echo $value;} ?></p>
             </div>
             
         </div>

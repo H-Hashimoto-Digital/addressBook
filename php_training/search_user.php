@@ -13,21 +13,19 @@
     $array = array();
     
 
-    // 検索ワードを基にuser_loginからユーザーを検索
-    $sql = "SELECT user_name FROM user_login WHERE user_name LIKE '%".$search."%'";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-
-    // 検索結果を配列$arrayに格納
-    $i = 0;
-
-    foreach($stmt as $row){
-        $array[$i] = $row['user_name'];
-        $i++;
+    // 検索ワードを基にuser_loginからユーザーを検索。検索対象となったユーザ名を配列$arrayに入れる。
+    $sql_search = "SELECT user_name FROM user_login WHERE user_name LIKE '%".$search."%'";
+    if($result_search = $mysqli->query($sql_search)){
+        $i = 0;
+        while($row = $result_search->fetch_assoc()){
+            $array[$i] = $row['user_name'];
+            $i++;
+        }
     }
 
     // 検索結果の入った$arrayをhome.phpに渡す
-    $url = "./home.php/?search=".$array;
-    header("Location:".$url);
+    // header(GET用)でパラメータを渡してはならない
+    // $url = "./home.php/?search=".$array;
+    // header("Location:".$url);
 
 ?>
