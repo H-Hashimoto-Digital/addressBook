@@ -11,7 +11,7 @@
     $tel = $_POST['tel'];
     $mail = $_POST['mail'];
 
-    var_dump(file_put_contents("out_update_profile.txt",[$user_name,$address,$tel,$mail], FILE_APPEND));
+    var_dump(file_put_contents("out_update_profile.txt", [$user_name,$address,$tel,$mail], FILE_APPEND));
 
     // プロフィール更新
     // 複数のテーブルにわたって更新するときはひとつのSQLで更新するのではなく、更新したいテーブルごとに別にSQLを発行

@@ -25,11 +25,10 @@
         $tel = '';
         $mail = '';
 
-        // "SELECT L.user_name, P.address, P.tel, P.mail FROM user_profile AS P INNER JOIN user_login AS L ON P.user_id = L.id WHERE L.user_name = '".$_SESSION['user_name']."'"
         $sql_profile = "SELECT L.user_name, P.address, P.tel, P.mail FROM user_profile AS P INNER JOIN user_login AS L ON P.user_id = L.id WHERE L.user_name = '".$_SESSION['user_name']."'";
 
-        if($result_pro1file = $mysqli->query($sql_profile)){
-            while($row = $result_pro1file->fetch_assoc()){
+        if($result_profile = $mysqli->query($sql_profile)){
+            while($row = $result_profile->fetch_assoc()){
                 $user_name = $row['user_name'];
                 $address = $row['address'];
                 $tel = $row['tel'];
